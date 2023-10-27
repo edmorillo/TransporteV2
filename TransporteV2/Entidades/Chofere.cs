@@ -14,6 +14,7 @@ namespace TransporteV2.Entidades
         }
 
         public int IdChofer { get; set; }
+        [RegularExpression("[a-z A-Z]{0,30}", ErrorMessage = "Primera letra Mayuscula y Solo ingrese texto")]
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         [DataType(DataType.Date)]
@@ -22,11 +23,16 @@ namespace TransporteV2.Entidades
         [Display(Name = "Tipo Documento")]
         public int? IdTdocuC { get; set; }
         [Display(Name = "N° Documento")]
-        [RegularExpression("[0-9]{8,8}", ErrorMessage = "EL campo {0} debe tener 8 digitos")]
+        [StringLength(maximumLength: 8, MinimumLength = 8, ErrorMessage = "La logintud del campo {0} debe contener {1} digitos")]
+        [RegularExpression("[0-9]{8,8}", ErrorMessage = "En el campo {0} solo ingrese números")]
         public string Ndocumento { get; set; }
         [Display(Name = "N° Trámite")]
+        [StringLength(maximumLength: 11, MinimumLength = 11, ErrorMessage = "La logintud del campo {0} debe contener {1} digitos")]
+        [RegularExpression("[0-9]{11,11}", ErrorMessage = "En el campo {0} solo ingrese números")]
         public string NuTramite { get; set; }
-        [RegularExpression("[0-9]{11,11}", ErrorMessage = "EL campo solo debe contener números y 11 digitos")]
+        
+        [StringLength(maximumLength: 11, MinimumLength = 11, ErrorMessage = "La logintud del campo {0} debe contener {1} digitos")]
+        [RegularExpression("[0-9]{11,11}", ErrorMessage = "En el campo {0} solo ingrese números")]
         public string Cuil { get; set; }
         [Display(Name = "Provincia")]
         public int? IdProvincia { get; set; }

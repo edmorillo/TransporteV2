@@ -10861,9 +10861,9 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
-  background-position: center;
-  background-size: cover;
+    background: url("https://unsplash.com/es/fotos/una-vista-de-la-cima-de-un-puente-en-las-nubes-Zp4bzkCR9YM");
+    background-position: center;
+    background-size: cover;
 }
 
 .bg-register-image {

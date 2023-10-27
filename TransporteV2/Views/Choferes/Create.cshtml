@@ -26,7 +26,7 @@
                             <div class="form-floating mb-2">
                                 <input asp-for="Nombre" class="form-control " placeholder="Ingrese Su nombre" required />
                                 <label asp-for="Nombre" class="control-label">Ingrese su nombre</label>
-                                <span asp-validation-for="Nombre" class="valid-feedback"></span>
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
                                 <span asp-validation-for="Nombre" class="valid-feedback">Datos correctos!</span>
                                 <span asp-validation-for="Nombre" class="invalid-feedback">Complete los datos!</span>
                             </div>
@@ -35,6 +35,9 @@
                                 <label asp-for="Apellido" class="control-label"></label>
                                 <span asp-validation-for="Apellido" class="text-danger"></span>
                             </div>
+
+
+
                             <div class="form-floating mb-2">
                                 <input asp-for="FechaNacimiento" class="form-control" placeholder="Ingrese fecha de Nacimiento" />
                                 <label asp-for="FechaNacimiento" class="control-label"></label>
@@ -54,8 +57,9 @@
                                 <span asp-validation-for="Ndocumento" class="invalid-feedback">EL campo solo debe contener 8 digitos</span>
                             </div>
                             <div class="form-floating mb-2">
-                                <label asp-for="NuTramite" class="control-label"></label>
+
                                 <input asp-for="NuTramite" class="form-control" placeholder="Ingrese n° trámite" required />
+                                <label asp-for="NuTramite" class="control-label"></label>
                                 <span asp-validation-for="NuTramite" class="text-danger"></span>
                                 <span asp-validation-for="NuTramite" class="valid-feedback">Datos correctos!</span>
                                 <span asp-validation-for="NuTramite" class="invalid-feedback">EL campo solo debe contener 11 digitos</span>
@@ -72,7 +76,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating mb-2">
-                                <select asp-for="IdProvincia" class="form-select" asp-items="ViewBag.IdTdocuC" required><option selected disabled value="">Seleccione una Provincia</option></select>
+                                <select asp-for="IdProvincia" class="form-select" asp-items="ViewBag.IdProvincia" required><option selected disabled value="">Seleccione una Provincia</option></select>
                                 <label asp-for="IdProvincia" for="floatingSelect"></label>
                                 <span asp-validation-for="IdProvincia" class="valid-feedback">Datos correctos!</span>
                                 <span asp-validation-for="IdProvincia" class="invalid-feedback">Seleccione una Provincia</span>
