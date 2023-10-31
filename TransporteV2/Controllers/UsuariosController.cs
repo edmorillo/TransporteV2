@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TransporteV2.Entidades;
 using TransporteV2.Models;
+using TransporteV2.Servicios;
 
 namespace TransporteV2.Controllers
 {
@@ -11,14 +13,14 @@ namespace TransporteV2.Controllers
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
-        
+        private readonly TAIProContext context;
 
         public UsuariosController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager, TAIProContext context)
         {
             this.userManager=userManager;
             this.signInManager=signInManager;
-            
+            this.context = context;
         }
 
         //Registrar Usuarios
@@ -61,7 +63,9 @@ namespace TransporteV2.Controllers
 
 
         //Login
+        
         [AllowAnonymous]
+        //[Authorize(Roles = Constantes.RolAdmin)]
         public IActionResult Login(string mensaje = null)
         {
             if (mensaje is not null)
@@ -75,7 +79,9 @@ namespace TransporteV2.Controllers
 
 
         [HttpPost]
+        
         [AllowAnonymous]
+        //[Authorize(Roles = Constantes.RolAdmin)]
         public async Task<IActionResult> Login(LoginViewModel modelo)
         {
             if (!ModelState.IsValid)
@@ -106,5 +112,63 @@ namespace TransporteV2.Controllers
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+        //Roles
+        //Listado de Usuarios
+
+        [HttpGet]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> Listado(string mensaje = null)
+        {
+            var usuarios = await context.Users.Select(u => new UsuarioViewModel
+            {
+                Email = u.Email
+            }).ToListAsync();
+
+            var modelo = new UsuariosListadoViewModel();
+            modelo.Usuarios = usuarios;
+            modelo.Mensaje = mensaje;
+            return View(modelo);
+
+        }
+
+        //Agregar a admin
+
+        [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> HacerAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.AddToRoleAsync(usuario, Constantes.RolAdmin);
+
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol asignado correctamente a " + email });
+        }
+
+        //remover a Admin
+
+        [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> RemoverAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.RemoveFromRoleAsync(usuario, Constantes.RolAdmin);
+
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol removido correctamente a " + email });
+        }
+
     }
 }

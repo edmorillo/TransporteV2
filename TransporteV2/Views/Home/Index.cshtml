@@ -1,7 +1,10 @@
-﻿@{
+﻿@using TransporteV2.Servicios;
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
+@if (User.IsInRole(Constantes.RolAdmin))
+                {
 <div class="container-fluid px-4">
 
     <div class="card-header">
@@ -102,3 +105,16 @@
     </div>
 
 </div>
+}
+else
+{
+    
+
+    <div class="card-header">
+        <h2 class="mt-4">Advertencia</h2>
+        <ol class="breadcrumb mb-4"></ol>
+    </div>
+    
+
+    <p>No tienes permisos para ver contenido del Sistema, porfavor solicite al administrador que lo agregue a un grupo.</p>
+}
