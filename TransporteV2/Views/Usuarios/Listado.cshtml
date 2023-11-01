@@ -46,16 +46,26 @@
                                         @usuario.Email
                                     </td>
                         <td>
-                            <button class="btn btn-primary me-2"
+                                        <button class="btn btn-outline-primary rounded-pill px-3 me-2"
                                     asp-action="HacerAdmin"
                                     asp-route-email="@usuario.Email">
                                 Hacer Admin
                             </button>
-                            <button class="btn btn-secondary me-2"
+                                        <button class="btn btn-outline-danger rounded-pill px-3 me-2"
                                     asp-action="RemoverAdmin"
                                     asp-route-email="@usuario.Email">
                                 Remover Admin
-                            </button>
+                            </button>|| 
+                                        <button class="btn btn-outline-primary rounded-pill px-3 me-2"
+                                                asp-action="HacerUserStandar"
+                                                asp-route-email="@usuario.Email">
+                                            Hacer User Standar
+                                        </button>
+                                        <button class="btn btn-outline-danger rounded-pill px-3 me-2"
+                                                asp-action="RemoverUserStandar"
+                                                asp-route-email="@usuario.Email">
+                                            Remover User Standar
+                                        </button>
                         </td>
                         
                     </tr>

@@ -57,20 +57,20 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span class="mr-2 d-none d-lg-inline text-gray-600 small">Hola, @User.Identity.Name</span><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                @if (User.IsInRole(Constantes.RolAdmin))
-                                {
+                            @if (User.IsInRole(Constantes.RolAdmin))
+                            {
                                     <a class="dropdown-item" asp-controller="Usuarios" asp-action="Listado">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Administrar Perfiles
                                     </a>
                                 }
                             </li>
-                            <li>
+                            @*<li>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Configuración
                                 </a>
-                            </li>
+                            </li>*@
                             <li><hr class="dropdown-divider" /></li>
                             <li>
                                 <form asp-action="logout" asp-controller="usuarios">
@@ -93,16 +93,20 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading"></div>
-                            @if (User.IsInRole(Constantes.RolAdmin))
+                        @if (User.IsInRole(Constantes.RolAdmin) || User.IsInRole(Constantes.RolStandar))
                         {
                             <a class="nav-link" asp-controller="Home" asp-action="Index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Inicio
                             </a>
+                        
+                        
                             @*agrega subtitulos en el submenú*@
                             <div class="sb-sidenav-menu-heading">Categorías</div>
 
                             @*submenú  Choferes*@
+
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
                                 Choferes
@@ -133,6 +137,7 @@
                                 </nav>
                             </div>
 
+
                             @*submenú  Compras*@
 
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCompras" aria-expanded="false" aria-controls="collapseCompras">
@@ -147,52 +152,53 @@
                                     <a class="nav-link" asp-controller="Compras" asp-action="Index">Administrar Compras</a>
                                 </nav>
                             </div>
+                        }
+                        @*submenú  Neumaticos*@
+                            @if (User.IsInRole(Constantes.RolAdmin))
+                            {
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNeumaticos" aria-expanded="false" aria-controls="collapseNeumaticos">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
+                                    Neumaticos
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
 
-                            @*submenú  Neumaticos*@
+                                <div class="collapse" id="collapseNeumaticos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" asp-controller="Neumaticoes" asp-action="Create">Añadir Neumatico</a>
+                                        <a class="nav-link" asp-controller="Neumaticoes" asp-action="Index">Administrar Neumaticos</a>
+                                    </nav>
+                                </div>
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseNeumaticos" aria-expanded="false" aria-controls="collapseNeumaticos">
-                                <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
-                                Neumaticos
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                                @*submenú Unidades*@
 
-                            <div class="collapse" id="collapseNeumaticos" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" asp-controller="Neumaticoes" asp-action="Create">Añadir Neumatico</a>
-                                    <a class="nav-link" asp-controller="Neumaticoes" asp-action="Index">Administrar Neumaticos</a>
-                                </nav>
-                            </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUnidades" aria-expanded="false" aria-controls="collapseUnidades">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
+                                    Unidades
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
 
-                            @*submenú Unidades*@
+                                <div class="collapse" id="collapseUnidades" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" asp-controller="Unidades" asp-action="Create">Añadir Unidad</a>
+                                        <a class="nav-link" asp-controller="Unidades" asp-action="Index">Administrar Unidades</a>
+                                    </nav>
+                                </div>
 
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUnidades" aria-expanded="false" aria-controls="collapseUnidades">
-                                <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
-                                Unidades
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
+                                @*submenú  Viajes*@
 
-                            <div class="collapse" id="collapseUnidades" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" asp-controller="Unidades" asp-action="Create">Añadir Unidad</a>
-                                    <a class="nav-link" asp-controller="Unidades" asp-action="Index">Administrar Unidades</a>
-                                </nav>
-                            </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseViajes" aria-expanded="false" aria-controls="collapseViajes">
+                                    <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
+                                    Viajes
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
 
-                            @*submenú  Viajes*@
-
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseViajes" aria-expanded="false" aria-controls="collapseViajes">
-                                <div class="sb-nav-link-icon"><i class="bi bi-person-workspace"></i></div>
-                                Viajes
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-
-                            <div class="collapse" id="collapseViajes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" asp-controller="Viajes" asp-action="Create">Añadir Viaje</a>
-                                    <a class="nav-link" asp-controller="Viajes" asp-action="Index">Administrar Viajes</a>
-                                </nav>
-                            </div>
-
+                                <div class="collapse" id="collapseViajes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" asp-controller="Viajes" asp-action="Create">Añadir Viaje</a>
+                                        <a class="nav-link" asp-controller="Viajes" asp-action="Index">Administrar Viajes</a>
+                                    </nav>
+                                </div>
+                            }
                             @*<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                         Pages
@@ -233,7 +239,9 @@
                             Usuarios
 
                         </a>*@
-                        }
+
+                        
+
                     </div>
 
                             </div>

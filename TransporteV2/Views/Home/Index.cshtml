@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-@if (User.IsInRole(Constantes.RolAdmin))
+@if (User.IsInRole(Constantes.RolAdmin) || User.IsInRole(Constantes.RolStandar))
                 {
 <div class="container-fluid px-4">
 
@@ -109,7 +109,7 @@
 else
 {
     
-
+    <div class="container-fluid px-4">
     <div class="card-header">
         <h2 class="mt-4">Advertencia</h2>
         <ol class="breadcrumb mb-4"></ol>
@@ -117,4 +117,7 @@ else
     
 
     <p>No tienes permisos para ver contenido del Sistema, porfavor solicite al administrador que lo agregue a un grupo.</p>
+
+    <img style="height: 300px; width:500px" src="https://kdosd.com/wp-content/uploads/2022/02/Como-evitar-que-el-Error-404-afecte-a-tu-SEO-1024x643.jpeg" />
+    </div>
 }

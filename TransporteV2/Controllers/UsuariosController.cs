@@ -170,5 +170,46 @@ namespace TransporteV2.Controllers
                 routeValues: new { mensaje = "Rol removido correctamente a " + email });
         }
 
+
+        ///
+
+        //Agregar a Usuario standar
+
+        [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> HacerUserStandar(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.AddToRoleAsync(usuario, Constantes.RolStandar);
+
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol asignado correctamente a " + email });
+        }
+
+        //remover a Usuario Standar
+
+        [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> RemoverUserStandar(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.RemoveFromRoleAsync(usuario, Constantes.RolStandar);
+
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol removido correctamente a " + email });
+        }
+
     }
 }
