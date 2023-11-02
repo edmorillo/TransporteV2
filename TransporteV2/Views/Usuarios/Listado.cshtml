@@ -19,43 +19,43 @@
 
         <div class="card-body">
 
-@if (Model.Mensaje is not null)
-{
-    <div class="alert alert-success" role="alert">
-        @Model.Mensaje
-    </div>
-}
+            @if (Model.Mensaje is not null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @Model.Mensaje
+                </div>
+            }
 
-@if (Model.Usuarios is not null)
-{
+            @if (Model.Usuarios is not null)
+            {
 
-    <form method="post">
-        <table class="table table-hover">
-            <thead>
-                <tr>
+                <form method="post">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
                                 <td>Email</td>
-                    <td>Acción</td>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var usuario in Model.Usuarios)
-                {
-                    <tr>
+                                <td>Acción</td>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model.Usuarios)
+                            {
+                                <tr>
                                     <td>
                                         @usuario.Email
                                     </td>
-                        <td>
+                                    <td>
                                         <button class="btn btn-outline-primary rounded-pill px-3 me-2"
-                                    asp-action="HacerAdmin"
-                                    asp-route-email="@usuario.Email">
-                                Hacer Admin
-                            </button>
+                                                asp-action="HacerAdmin"
+                                                asp-route-email="@usuario.Email">
+                                            Hacer Admin
+                                        </button>
                                         <button class="btn btn-outline-danger rounded-pill px-3 me-2"
-                                    asp-action="RemoverAdmin"
-                                    asp-route-email="@usuario.Email">
-                                Remover Admin
-                            </button>|| 
+                                                asp-action="RemoverAdmin"
+                                                asp-route-email="@usuario.Email">
+                                            Remover Admin
+                                        </button>||
                                         <button class="btn btn-outline-primary rounded-pill px-3 me-2"
                                                 asp-action="HacerUserStandar"
                                                 asp-route-email="@usuario.Email">
@@ -65,20 +65,25 @@
                                                 asp-action="RemoverUserStandar"
                                                 asp-route-email="@usuario.Email">
                                             Remover User Standar
-                                        </button>
-                        </td>
-                        
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </form>
+                                        </button>||
+                                        @*<button class="btn btn-outline-danger rounded-pill px-3 me-2"
+                                                asp-action="Delete"
+                                                asp-route-email="@usuario.Id">
+                                            Eliminar Usuario
+                                        </button>*@
+                                    </td>
 
-}
-else
-{
-    <p>No hay usuarios para mostrar</p>
-}
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </form>
+
+            }
+            else
+            {
+                <p>No hay usuarios para mostrar</p>
+            }
 
         </div>
 

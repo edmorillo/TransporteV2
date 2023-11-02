@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TransporteV2.Entidades;
 using TransporteV2.Models;
 using TransporteV2.Servicios;
+using TransporteV2.Migrations;
 
 namespace TransporteV2.Controllers
 {
@@ -210,6 +211,28 @@ namespace TransporteV2.Controllers
             return RedirectToAction("Listado",
                 routeValues: new { mensaje = "Rol removido correctamente a " + email });
         }
+
+
+        //Eliminar Usuario
+
+        [HttpPost]
+        [Authorize(Roles = Constantes.RolAdmin)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var usuario = await context.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            await userManager.DeleteAsync(usuario);
+
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Usuario Eliminado correctamente "});
+        }
+
+
 
     }
 }
