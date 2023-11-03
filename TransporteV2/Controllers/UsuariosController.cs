@@ -42,7 +42,7 @@ namespace TransporteV2.Controllers
                 return View(modelo);
             }
 
-            var usuario = new IdentityUser() { Email = modelo.Email, UserName = modelo.Email };
+            var usuario = new IdentityUser() { Email = modelo.Email, UserName = modelo.Email};
             var resultado = await userManager.CreateAsync(usuario, password: modelo.Password);
 
             if (resultado.Succeeded)

@@ -50,7 +50,10 @@ namespace TransporteV2.Controllers
         // GET: Viajes/Create
         public IActionResult Create()
         {
-            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "IdChofer");
+            var _context2 = _context;
+            var listaChofer = _context2.Choferes.Where(Chofere => Chofere.Cuil == "12345678900").ToList();
+
+            ViewData["IdChofer"] = new SelectList(listaChofer, "IdChofer", "Nombre");
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
             ViewData["IdLocalidad"] = new SelectList(_context.Localidades, "IdLocalidad", "IdLocalidad");
             ViewData["IdProvincia"] = new SelectList(_context.Provincia, "IdProvincia", "IdProvincia");
@@ -70,7 +73,7 @@ namespace TransporteV2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "IdChofer", viaje.IdChofer);
+            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "Nombre", viaje.IdChofer);
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", viaje.IdCliente);
             ViewData["IdLocalidad"] = new SelectList(_context.Localidades, "IdLocalidad", "IdLocalidad", viaje.IdLocalidad);
             ViewData["IdProvincia"] = new SelectList(_context.Provincia, "IdProvincia", "IdProvincia", viaje.IdProvincia);
@@ -90,7 +93,7 @@ namespace TransporteV2.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "IdChofer", viaje.IdChofer);
+            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "Nombre", viaje.IdChofer);
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", viaje.IdCliente);
             ViewData["IdLocalidad"] = new SelectList(_context.Localidades, "IdLocalidad", "IdLocalidad", viaje.IdLocalidad);
             ViewData["IdProvincia"] = new SelectList(_context.Provincia, "IdProvincia", "IdProvincia", viaje.IdProvincia);
@@ -129,7 +132,7 @@ namespace TransporteV2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "IdChofer", viaje.IdChofer);
+            ViewData["IdChofer"] = new SelectList(_context.Choferes, "IdChofer", "Nombre", viaje.IdChofer);
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", viaje.IdCliente);
             ViewData["IdLocalidad"] = new SelectList(_context.Localidades, "IdLocalidad", "IdLocalidad", viaje.IdLocalidad);
             ViewData["IdProvincia"] = new SelectList(_context.Provincia, "IdProvincia", "IdProvincia", viaje.IdProvincia);

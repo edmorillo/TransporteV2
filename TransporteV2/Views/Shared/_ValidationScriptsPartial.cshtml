@@ -44,3 +44,20 @@
         });
     });
 </script>*@
+
+<script>
+    function mostrarOcultarContrasena() {
+        var contrasenaInput = document.getElementById("contrasena");
+        var contrasenaMostrada = document.getElementById("contrasenaMostrada");
+        var mostrarContrasenaCheckbox = document.getElementById("mostrarContrasena");
+
+        if (mostrarContrasenaCheckbox.checked) {
+            contrasenaInput.type = "text";
+            contrasenaMostrada.style.display = "block";
+            contrasenaMostrada.textContent = "Contraseña: " + contrasenaInput.value;
+        } else {
+            contrasenaInput.type = "password";
+            contrasenaMostrada.style.display = "none";
+        }
+    }
+</script>

@@ -11,5 +11,7 @@ namespace TransporteV2.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string PlainPassword { get; set; }
     }
 }

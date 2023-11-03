@@ -34,18 +34,23 @@
                                 </div>
                                 <form asp-action="Login" class="user">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <div class="form-group">
-                                        <input asp-for="Email" class="form-control form-control-user"
-                                               aria-describedby="emailHelp"
-                                               placeholder="Introducir la dirección de correo electrónico...">
-                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input asp-for="Password" class="form-control form-control-user"
-                                               placeholder="Contraseña">
-                                        <span asp-validation-for="Password" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
+                                <div class="form-floating mb-2">
+                                    <input asp-for="Email" class="form-control form-control-user"
+                                           placeholder="Dirección de correo electrónico">
+                                    <label asp-for="Email" class="control-label">Introducir la dirección de correo electrónico...</label>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input asp-for="Password" class="form-control form-control-user"
+                                           id="contrasena" placeholder="Contraseña">
+                                    <label asp-for="Password" class="control-label">Introducir contraseña...</label>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mostrarContrasena">Mostrar Contraseña:</label>
+                                    <input type="checkbox" id="mostrarContrasena" onchange="mostrarOcultarContrasena()">
+                                </div>
+                                    @*<div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" asp-for="Recuerdame">
                                             <label class="custom-control-label" asp-for="Recuerdame">
@@ -53,7 +58,7 @@
                                             </label>
 
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <button class="btn btn-primary btn-user btn-block">Iniciar sesión</button>
 
                                     @*<hr>
